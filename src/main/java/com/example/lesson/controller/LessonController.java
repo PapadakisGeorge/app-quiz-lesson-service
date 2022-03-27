@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -16,7 +15,7 @@ import java.util.Optional;
 public record LessonController(LessonService lessonService) {
 
     @PostMapping
-    public void createLesson(@RequestBody LessonCreationRequest lessonCreationRequest) {
+    public void createLesson(@RequestBody LessonCreationRequest lessonCreationRequest){
         log.info("new lesson was inserted {}", lessonCreationRequest);
         lessonService.createLesson(lessonCreationRequest);
     }
@@ -32,7 +31,7 @@ public record LessonController(LessonService lessonService) {
     }
 
     @GetMapping
-    List<Lesson> getLessonsByName(@RequestParam(value="name") String lessonName) throws LessonNotFoundException {
-        return lessonService.getLessonsByName(lessonName);
+    List<Lesson> getLessonsByTitle(@RequestParam(value = "title") String lessonTitle) throws LessonNotFoundException {
+        return lessonService.getLessonsByTitle(lessonTitle);
     }
 }

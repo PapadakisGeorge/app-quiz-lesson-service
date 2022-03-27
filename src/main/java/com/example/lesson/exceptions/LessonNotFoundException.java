@@ -9,7 +9,7 @@ public class LessonNotFoundException extends Exception {
         super(errorMessage);
     }
 
-    public LessonNotFoundException(String errorMessage, String lessonName){
+    public LessonNotFoundException(String errorMessage, String lessonTitle){
         super(errorMessage);
     }
 }

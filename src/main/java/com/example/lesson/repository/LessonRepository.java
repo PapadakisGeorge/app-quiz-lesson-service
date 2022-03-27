@@ -11,5 +11,5 @@ import java.util.List;
 public interface LessonRepository extends JpaRepository<Lesson, Integer> {
 
     @Query
-    List<Lesson> findLessonByLessonName(String lessonName);
+    List<Lesson> findLessonBylessonTitle(String lessonTitle);
 }

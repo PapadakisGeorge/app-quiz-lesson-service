@@ -6,7 +6,7 @@ spring:
     name: lesson
   datasource:
     username: 'admin'
-    url: jdbc:postgresql://localhost:5432/lesson
+    url: jdbc:postgresql://postgres:5432/lesson
     password: 'password'
   jpa:
     properties:
