@@ -19,19 +19,19 @@ public record LessonService(LessonRepository lessonRepository) {
         lessonRepository.save(lesson);
     }
 
-    public List<Lesson> getLessons() {
+    public List<Lesson> getAllLessons() {
         return lessonRepository.findAll();
     }
 
     public Lesson getLessonById(Integer id) throws LessonNotFoundException {
         return lessonRepository.findById(id)
-                .orElseThrow(() -> new LessonNotFoundException("Lesson with id {} was not found.", id));
+                .orElseThrow(() -> new LessonNotFoundException("Lesson with id " + id + " was not found."));
     }
 
     public List<Lesson> getLessonsByTitle(String lessonTitle) throws LessonNotFoundException {
-        List<Lesson> lessonsList = lessonRepository.findLessonBylessonTitle(lessonTitle);
+        List<Lesson> lessonsList = lessonRepository.findLessonByTitle(lessonTitle);
         if (lessonsList.isEmpty()) {
-            throw new LessonNotFoundException("Lesson with name {} was not found.", lessonTitle);
+            throw new LessonNotFoundException("Lesson with name " + lessonTitle + " was not found.");
         }
         return lessonsList;
     }

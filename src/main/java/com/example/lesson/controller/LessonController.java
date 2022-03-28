@@ -22,7 +22,7 @@ public record LessonController(LessonService lessonService) {
 
     @GetMapping("/all")
     List<Lesson> getAllLessons() {
-        return lessonService.getLessons();
+        return lessonService.getAllLessons();
     }
 
     @GetMapping("/{id}")

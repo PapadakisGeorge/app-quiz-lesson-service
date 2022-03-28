@@ -35,4 +35,5 @@ public class Lesson {
     @NotBlank(message = "Title should be non empty")
     @NotNull(message = "Title should be non null")
     private String lessonTitle;
+
 }
