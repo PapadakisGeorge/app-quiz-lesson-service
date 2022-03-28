@@ -5,9 +5,9 @@ spring:
   application:
     name: lesson
   datasource:
-    username: 'admin'
-    url: jdbc:postgresql://postgres:5432/lesson
-    password: 'password'
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    url: ${POSTGRES_URL}
   jpa:
     properties:
       hibernate:

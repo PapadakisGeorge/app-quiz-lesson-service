@@ -6,7 +6,6 @@ import com.example.lesson.dto.LessonCreationRequest;
 import com.example.lesson.repository.LessonRepository;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.List;
 

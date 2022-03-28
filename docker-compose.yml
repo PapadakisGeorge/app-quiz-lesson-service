@@ -18,14 +18,14 @@ services:
     env_file:
       - .env
     volumes:
-      - postgres:/data/postgres
+      - postgres:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
       - postgres
     restart: unless-stopped
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      test: [ "CMD-SHELL", "pg_isready -U admin -d lesson" ]
       interval: 10s
       timeout: 5s
       retries: 5
