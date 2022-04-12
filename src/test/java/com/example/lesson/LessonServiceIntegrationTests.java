@@ -64,11 +64,5 @@ public class LessonServiceIntegrationTests {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/lessons/" + id))
                 .andExpect(status().isOk())
                 .andExpect(content().string("{\"id\":1,\"lessonTitle\":\"Lesson 1\"}"));
-
-        //        // Then there should be only one lesson
-//        assertThat(lessonService.getAllLessons()).hasSize(1);
-//
-//        // And the lesson title should be the correct one
-//        assertThat(lessonService.getAllLessons().get(0).getLessonTitle()).isEqualTo("Mock Lesson Title");
     }
 }
