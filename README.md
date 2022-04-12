@@ -11,6 +11,6 @@ If it is the first time doing that, you will have to create a new server named a
 
 Run ````mvn clean package````
 
-# Run Unit Tests
+# Run Tests
 
 Run ```mvn clean verify```
