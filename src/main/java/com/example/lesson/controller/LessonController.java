@@ -35,3 +35,4 @@ public record LessonController(LessonService lessonService) {
         return lessonService.getLessonsByTitle(lessonTitle);
     }
 }
+

@@ -5,6 +5,7 @@ import com.example.lesson.exceptions.LessonNotFoundException;
 import com.example.lesson.model.Lesson;
 import com.example.lesson.repository.LessonRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -21,7 +22,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class LessonServiceTest {
+class LessonServiceUnitTests {
 
     @Mock
     private LessonRepository lessonRepositoryTest;
@@ -33,6 +34,7 @@ class LessonServiceTest {
     }
 
     @Test
+    @DisplayName("Should be able to create a lesson")
     void canCreateLesson() {
         //when I try to create the lesson
         LessonCreationRequest lessonCreationRequest = new LessonCreationRequest("Mock Lesson Title");
@@ -54,6 +56,7 @@ class LessonServiceTest {
     }
 
     @Test
+    @DisplayName("Should be able to get all lessons")
     void canGetAllLessons() {
         //when I get all lessons
         lessonServiceTest.getAllLessons();
@@ -63,6 +66,7 @@ class LessonServiceTest {
     }
 
     @Test
+    @DisplayName("Should get a lesson by id when it exists")
     void canGetLessonsById() throws LessonNotFoundException {
         //given a lesson with a given title exists
         LessonCreationRequest lessonCreationRequest = new LessonCreationRequest("Mock Lesson Title");
@@ -79,6 +83,7 @@ class LessonServiceTest {
     }
 
     @Test
+    @DisplayName("Should get the Lesson not Found exception when getting lesson by id that does not exist")
     void getLessonsByIdException() {
         //given a lesson with a given title does not exist
         LessonCreationRequest lessonCreationRequest = new LessonCreationRequest("Mock Lesson Title");
@@ -95,6 +100,7 @@ class LessonServiceTest {
     }
 
     @Test
+    @DisplayName("Should get a lesson by title when it exists")
     void canGetLessonsByTitle() throws LessonNotFoundException {
         //given a lesson with a given title exists
         LessonCreationRequest lessonCreationRequest = new LessonCreationRequest("Mock Lesson Title");
@@ -108,10 +114,12 @@ class LessonServiceTest {
                 .thenReturn(retrievedLessons);
 
         //when I try to get a lesson that exists by id
+        //then I get a lesson
         assertThat(lessonServiceTest.getLessonsByTitle("Mock Lesson Title").size()).isEqualTo(1);
     }
 
     @Test
+    @DisplayName("Should get the Lesson not Found exception when getting lesson by title that does not exist")
     void getLessonsByTitleException() {
         //given a lesson with a given title does not exist
         LessonCreationRequest lessonCreationRequest = new LessonCreationRequest("Mock Lesson Title");
