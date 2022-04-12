@@ -4,6 +4,7 @@ import com.example.lesson.dto.LessonCreationRequest;
 import com.example.lesson.model.Lesson;
 import com.example.lesson.service.LessonService;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -13,7 +14,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-class LessonRepositoryTest {
+class LessonRepositoryUnitTests {
 
     @Autowired
     private LessonRepository lessonRepositoryTest;
@@ -24,6 +25,7 @@ class LessonRepositoryTest {
     }
 
     @Test
+    @DisplayName("Should be able to add a lesson and check that it exists")
     void itShouldCheckFindLessonsByTitleWhenLessonExists(){
         // given I create a lessons
         LessonService lessonService = new LessonService(lessonRepositoryTest);
@@ -38,6 +40,7 @@ class LessonRepositoryTest {
     }
 
     @Test
+    @DisplayName("Should be able to add 2 lessons with the same name and get both of them")
     void itShouldCheckFindLessonsByTitleWhenMultipleLessonsExist(){
         // given I create 2 lessons with the same name
         LessonService lessonService = new LessonService(lessonRepositoryTest);
@@ -54,6 +57,7 @@ class LessonRepositoryTest {
     }
 
     @Test
+    @DisplayName("Should get an empty list when trying to get a non existing lesson by title")
     void itShouldCheckFindLessonsByTitleWhenLessonDoesNotExist(){
         // given I create a lesson
         LessonService lessonService = new LessonService(lessonRepositoryTest);
