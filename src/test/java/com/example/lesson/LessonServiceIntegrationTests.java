@@ -1,18 +1,22 @@
 package com.example.lesson;
 
+import net.minidev.json.parser.JSONParser;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.JsonPathResultMatchers;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.shaded.com.fasterxml.jackson.databind.util.JSONPObject;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -40,28 +44,27 @@ public class LessonServiceIntegrationTests {
     @Test
     void addAndGetLessons() throws Exception {
 
-        // When I get all names then there is nothing there!
+        // I can get all names then there is nothing there!
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/lessons/all"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("[]"));
 
 
-        //When I add a lesson
+        // I can add a lesson without problems
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/lessons")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"lessonTitle\": \"Lesson 1\"}"))
                 .andExpect(status().isOk());
 
+        // I can get the lesson I added in the previous step by title
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/lessons/all?title=Lesson 1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()", Matchers.is(1)))
                 .andExpect(jsonPath("$[0].lessonTitle").value("Lesson 1"));
 
-
-        String id = "1";
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/lessons/" + id))
+        // I can get the lesson I added in the previous step by id
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/lessons/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("{\"id\":1,\"lessonTitle\":\"Lesson 1\"}"));
     }
