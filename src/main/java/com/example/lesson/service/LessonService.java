@@ -31,7 +31,7 @@ public record LessonService(LessonRepository lessonRepository) {
     public List<Lesson> getLessonsByTitle(String lessonTitle) throws LessonNotFoundException {
         List<Lesson> lessonsList = lessonRepository.findLessonByTitle(lessonTitle);
         if (lessonsList.isEmpty()) {
-            throw new LessonNotFoundException("Lesson with name " + lessonTitle + " was not found.");
+            throw new LessonNotFoundException("Lesson with title " + lessonTitle + " was not found.");
         }
         return lessonsList;
     }
